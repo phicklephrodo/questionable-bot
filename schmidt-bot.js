@@ -8,5 +8,4 @@ mybot.on("message", function(message) {
     }
 });
 
-mybot.login("","");
-// If you still need to login with email and password, use mybot.login("email", "password");
+mybot.login("email here" , "password here");
