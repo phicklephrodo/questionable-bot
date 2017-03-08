@@ -4,6 +4,9 @@ var login = require("./login.json");
 var client = new Discord.Client();
 
 var currentVoiceChannel = null;
+client.on("ready", () => {
+	console.log("I am ready!");
+});
 client.on("debug", function(m) {console.log("[debug]", m)});
 client.on("warn", function(m){console.log("[warn]", m)});
 client.on("message", function(message) {
@@ -30,8 +33,7 @@ client.on("message", function(message) {
         }
     }
     else if (message.content === "!test"){
-        client.replyTTS(message,"It's working!");
-        client.reply(message, "https://giphy.com/gifs/9K2nFglCAQClO");
+        message.channel.sendMessage("https://giphy.com/gifs/9K2nFglCAQClO");
     }
      else if (message.content.match(/^\/r\/.*/)){
         var afterR = message.content.match(/^\/r\/.*/);
@@ -43,7 +45,7 @@ client.on("message", function(message) {
         var index = afterR.indexOf(' ');
         var endSub = index >= 0 ? index : afterR.length;
         var url = 'http://reddit.com' + afterR.substring(0,endSub) + '/top/?sort=top&t=all';
-        client.reply(message, url);
+        message.channel.sendMessage(url);
     }
 });
 
@@ -54,4 +56,4 @@ function exitVoiceChannel(){
     }
 }
 
-client.login(login.username , login.pass);
+client.login(login.token);
