@@ -1,5 +1,6 @@
 var Discord = require("discord.js");
 var settings = require("./settings.json");
+var login = require("./login.json");
 var client = new Discord.Client();
 
 var currentVoiceChannel = null;
@@ -41,7 +42,7 @@ client.on("message", function(message) {
             return;
         var index = afterR.indexOf(' ');
         var endSub = index >= 0 ? index : afterR.length;
-        var url = 'www.reddit.com' + afterR.substring(0,endSub) + '/top/?sort=top&t=all';
+        var url = 'http://reddit.com' + afterR.substring(0,endSub) + '/top/?sort=top&t=all';
         client.reply(message, url);
     }
 });
@@ -53,4 +54,4 @@ function exitVoiceChannel(){
     }
 }
 
-client.login("" , "");
+client.login(login.username , login.pass);
