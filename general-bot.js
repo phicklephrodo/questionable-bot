@@ -29,8 +29,20 @@ client.on("message", function(message) {
         }
     }
     else if (message.content === "!test"){
-	client.replyTTS(message,"It's working!");
-	client.reply(message, "https://giphy.com/gifs/9K2nFglCAQClO");
+        client.replyTTS(message,"It's working!");
+        client.reply(message, "https://giphy.com/gifs/9K2nFglCAQClO");
+    }
+     else if (message.content.match(/^\/r\/.*/)){
+        var afterR = message.content.match(/^\/r\/.*/);
+        if (afterR.length > 1)
+            return;
+        afterR = afterR[0];
+        if (afterR.length < 4)
+            return;
+        var index = afterR.indexOf(' ');
+        var endSub = index >= 0 ? index : afterR.length;
+        var url = 'www.reddit.com' + afterR.substring(0,endSub) + '/top/?sort=top&t=all';
+        client.reply(message, url);
     }
 });
 
